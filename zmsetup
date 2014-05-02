@@ -1,0 +1,132 @@
+#!/bin/bash
+
+# BASE VERSION - Begin
+BASE_VERSION=0.01
+# BASE VERSION - End
+
+# SUFFIX VERSION - Begin
+SUFFIX_VERSION=""
+# SUFFIX VERSION - End
+
+#PACKAGE VERSION - Begin
+PACKAGE_VERSION=${BASE_VERSION}${SUFFIX_VERSION}
+#PACKAGE VERSION - End
+
+usage() {
+cat <<EOF
+
+  zmsetup ${PACKAGE_VERSION}
+  Copyright Adrian Gibanel Lopez
+  Licensed under the GNU PUBLIC LICENSE 3.0
+
+  Usage: $0 [--conf=CONFIGURATION_FILE] [--install-needed-packages] [--distro=DISTRIBUTION] [--split-dns-bind]
+
+  Example: $0 --conf=/home/user/myzimbra.conf
+  Example: $0 --conf=/home/user/myzimbra.conf --install-needed-packages --distro=ubuntu1204
+  Example: $0 --conf=/home/user/myzimbra.conf --split-dns-bind --distro=ubuntu1204
+
+
+
+EOF
+
+}
+
+# Creates a sed partial string for substitution
+# $1 is the FROM string
+# $2 is the TO string
+sed_partial_string()
+{
+	#local FILE="$1"
+	local FROM="$1"
+	local TO="$2"
+
+echo "s~$FROM~$TO~g"
+
+} # End of sed_partial_string()
+
+function check_executable_file () {
+
+    local PARAMETRES_NUMBER=1
+
+    if [[ ! $# -eq ${PARAMETRES_NUMBER} ]]
+    then
+    echo -e -n "Incorrect number of parametres (check_executable_file)\n"
+    echo -e -n "Aborting...\n"
+    exit 1;
+    fi
+
+  local FILE_TO_CHECK=$1;
+
+  if [[ ! -x ${FILE_TO_CHECK} ]]
+  then
+  echo -e -n "Required file: ${FILE_TO_CHECK} (executable) was not found\n"
+  echo -e -n "Aborting...\n"
+  exit 1;
+  fi  
+
+
+}
+
+
+function check_exists_file () {
+
+    local PARAMETRES_NUMBER=1
+
+    if [[ ! $# -eq ${PARAMETRES_NUMBER} ]]
+    then
+    echo -e -n "Incorrect number of parametres (check_exists_file)\n"
+    echo -e -n "Aborting...\n"
+    exit 1;
+    fi
+
+  local FILE_TO_CHECK=$1;
+
+  if [[ ! -e ${FILE_TO_CHECK} ]]
+  then
+  echo -e -n "Required file: ${FILE_TO_CHECK} (exists) was not found\n"
+  echo -e -n "Aborting...\n"
+  exit 1;
+  fi  
+
+
+}
+ 
+### MAIN PROGRAM ### ### ### ### ### ### ### ###
+################ ### ### ### ### ### ### ### ###
+###              ### ### ### ### ### ### ### ###
+###              ### ### ### ### ### ### ### ###
+
+# Check the arguments.
+for option in "$@"; do
+    case "$option" in
+    -h | --help)
+	usage
+	exit 0 ;;
+    -v | --version)
+	echo "zmsetup (${PACKAGE_VERSION})"
+	exit 0 ;;
+    --distro=*)
+	DISTRO=`echo "$option" | sed 's/--distro=//'` ;;
+    --conf=*)
+	CONF=`echo "$option" | sed 's/--conf=//'` ;;
+    --install-needed-packages )
+	INSTALL_NEED_PACKAGES="yes" ;;
+    # This is an undocumented feature...
+    --debug)
+	debug=yes ;;
+    -*)
+	echo "Unrecognized option \`$option'" 1>&2
+	usage
+	exit 1
+	;;
+    *)
+	echo "Unrecognized option \`$option'" 1>&2
+	usage
+	exit 1
+	;;
+    esac
+done
+
+
+
+
