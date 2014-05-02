@@ -127,6 +127,29 @@ for option in "$@"; do
     esac
 done
 
+# Read default custom file for this host
+ZMSETUP_DEFAULT_CONF_FILE="/usr/local/etc/zmsetup/default.conf"
+if [ -f "${ZMSETUP_DEFAULT_CONF_FILE}" ] ; then
+  source "${ZMSETUP_DEFAULT_CONF_FILE}"
+fi
+
+# Read custom configuration files for this host
+# if they exist
+ZMSETUP_DEFAULT_CONFD="/usr/local/etc/zmsetup/conf.d/"
+if [ -d "${ZMSETUP_DEFAULT_CONFD}" ] ; then
+  source "${ZMSETUP_DEFAULT_CONFD}"/*\.conf
+fi
+
+# If a custom file is specified check if we can read it or abort
+if [[ "x${CONF}" != x ]] ; then
+  if [ ! -f "${CONF}" ] ; then
+    echo -e -n "We cannot read configuration file: ${CONF}\n"
+    echo -e -n "Aborting...\n"
+    exit 1
+  else
+    source "${CONF}"
+  fi
+fi
 
 
 
