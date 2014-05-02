@@ -127,15 +127,17 @@ for option in "$@"; do
     esac
 done
 
-# Read default custom file for this host
 ZMSETUP_DEFAULT_CONF_FILE="/usr/local/etc/zmsetup/default.conf"
+ZMSETUP_DEFAULT_CONFD="/usr/local/etc/zmsetup/conf.d/"
+
+# Read default custom file for this host
+
 if [ -f "${ZMSETUP_DEFAULT_CONF_FILE}" ] ; then
   source "${ZMSETUP_DEFAULT_CONF_FILE}"
 fi
 
 # Read custom configuration files for this host
 # if they exist
-ZMSETUP_DEFAULT_CONFD="/usr/local/etc/zmsetup/conf.d/"
 if [ -d "${ZMSETUP_DEFAULT_CONFD}" ] ; then
   source "${ZMSETUP_DEFAULT_CONFD}"/*\.conf
 fi
@@ -150,6 +152,4 @@ if [[ "x${CONF}" != x ]] ; then
     source "${CONF}"
   fi
 fi
-
-
 
