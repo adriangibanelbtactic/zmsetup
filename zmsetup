@@ -129,6 +129,7 @@ done
 
 ZMSETUP_DEFAULT_CONF_FILE="/usr/local/etc/zmsetup/default.conf"
 ZMSETUP_DEFAULT_CONFD="/usr/local/etc/zmsetup/conf.d/"
+ZMSETUP_DEFAULT_LIB_DIR="/usr/local/lib/zmsetup"
 
 # Read default custom file for this host
 
@@ -151,5 +152,13 @@ if [[ "x${CONF}" != x ]] ; then
   else
     source "${CONF}"
   fi
+fi
+
+# Check if lib dir exists and its common.sh file
+if [ ! -f "${ZMSETUP_DEFAULT_LIB_DIR}"/"common.sh" ] ; then
+  echo -e -n "We cannot read common.sh file: ${ZMSETUP_DEFAULT_LIB_DIR}/common.sh \n"
+  echo -e -n "Check your zmsetup installation\n"
+  echo -e -n "Aborting...\n"
+  exit 1
 fi
 
