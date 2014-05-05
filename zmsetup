@@ -22,10 +22,106 @@ cat <<EOF
   Usage: $0 [--conf=CONFIGURATION_FILE] [--install-needed-packages] [--distro=DISTRIBUTION] [--split-dns-bind]
 
   Example: $0 --conf=/home/user/myzimbra.conf
-  Example: $0 --conf=/home/user/myzimbra.conf --install-needed-packages --distro=ubuntu1204
-  Example: $0 --conf=/home/user/myzimbra.conf --split-dns-bind --distro=ubuntu1204
 
+  INSTALL NEEDED PACKAGES
+  =======================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --install-needed-packages --distro=ubuntu1204
+  Config file example:
+    DISTRO="ubuntu1204"
+    INSTALL_NEED_PACKAGES="yes"
+    
+  SPLIT DNS BIND SETUP
+  ====================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --split-dns-bind --distro=ubuntu1204
+  Config file example:
+    DISTRO="ubuntu1204"
+    SPLIT_DNS_BIND_SETUP="yes"
 
+  DOWNLOAD ZCS
+  ============
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --download-zcs --distro=ubuntu1204 --zimbra-type=ose --specific-download=807
+  Config file example:
+    DISTRO="ubuntu1204"
+    DOWNLOAD_ZCS="yes"
+    ZIMBRA_TYPE="ose"
+    SPECIFIC_DOWNLOAD="807"
+
+  INSTALL_ZCS_LDAP
+  ================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --install-zcs-ldap
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    INSTALL_ZCS_LDAP="yes"
+
+  NAGIOS_ZCS_LDAP
+  ================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --nagios-zcs-ldap
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    NAGIOS_ZCS_LDAP="yes"
+
+  INSTALL_ZCS_MTA
+  ================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --install-zcs-mta
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    INSTALL_ZCS_MTA="yes"
+
+  NAGIOS_ZCS_MTA
+  ================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --nagios-zcs-mta
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    NAGIOS_ZCS_MTA="yes"
+
+  SETUP_ZCS_MTA_PLUS
+  ==================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --setup-zcs-mta-plus
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    SETUP_ZCS_MTA_PLUS="yes"
+
+  REENABLE_ZCS_MTA_PLUS
+  ==================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --reenable-zcs-mta-plus
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    REENABLE_ZCS_MTA_PLUS="yes"
+
+  SETUP_ZCS_MTA_MULTIPLE_IPS
+  ==========================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --setup-zcs-multiple-ips
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    SETUP_ZCS_MTA_MULTIPLE_IPS="yes"
+    MTA_MULTIPLE_IP_DOMAIN[0]="domain1.com"
+    MTA_MULTIPLE_IP_ADDRESS[0]="1.2.3.4"
+    MTA_MULTIPLE_IP_DOMAIN[1]="domain2.com"
+    MTA_MULTIPLE_IP_ADDRESS[1]="3.5.7.9"
+
+  DISABLE_ENCRYPTED_PDF_WARNING
+  =============================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --disable-encrypted-pdf-warning
+  Config file example:
+    DISABLE_ENCRYPTED_PDF_WARNING="yes"
 
 EOF
 
@@ -160,5 +256,7 @@ if [ ! -f "${ZMSETUP_DEFAULT_LIB_DIR}"/"common.sh" ] ; then
   echo -e -n "Check your zmsetup installation\n"
   echo -e -n "Aborting...\n"
   exit 1
+else
+  source "${ZMSETUP_DEFAULT_LIB_DIR}"/"common.sh"
 fi
 
