@@ -58,6 +58,15 @@ cat <<EOF
     ZIMBRA_TYPE="ose"
     INSTALL_ZCS_LDAP="yes"
 
+  INSTALL_ZCS_PROXY
+  =================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --install-zcs-proxy
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    INSTALL_ZCS_PROXY="yes"
+
   NAGIOS_ZCS_LDAP
   ================
   Command line example:
@@ -113,8 +122,10 @@ cat <<EOF
     SETUP_ZCS_MTA_MULTIPLE_IPS="yes"
     MTA_MULTIPLE_IP_DOMAIN[0]="domain1.com"
     MTA_MULTIPLE_IP_ADDRESS[0]="1.2.3.4"
+    MTA_MULTIPLE_IP_VIRTUALHOST[0]="mail.domain1.com"
     MTA_MULTIPLE_IP_DOMAIN[1]="domain2.com"
     MTA_MULTIPLE_IP_ADDRESS[1]="3.5.7.9"
+    MTA_MULTIPLE_IP_VIRTUALHOST[1]="webmail.domain2.com"
 
   DISABLE_ENCRYPTED_PDF_WARNING
   =============================
@@ -122,6 +133,29 @@ cat <<EOF
     Example: $0 --conf=/home/user/myzimbra.conf --disable-encrypted-pdf-warning
   Config file example:
     DISABLE_ENCRYPTED_PDF_WARNING="yes"
+
+  INSTALL_ZCS_MAILBOX
+  ===================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --install-zcs-mailbox --keep-custom-zimlets --keep-custom-skins
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    INSTALL_ZCS_MAILBOX="yes"
+    KEEP_CUSTOM_ZIMLETS="yes"
+    KEEP_CUSTOM_SKINS="yes"
+
+  SETUP_CATALA
+  ============
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --multi-spell-catala --spell-catala --language-catala
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    INSTALL_ZCS_MAILBOX="yes"
+    MULTI_SPELL_CATALA="yes"
+    SPELL_CATALA="yes"
+    LANGUAGE_CATALA="yes"
 
 EOF
 
