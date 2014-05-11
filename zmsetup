@@ -145,6 +145,15 @@ cat <<EOF
     KEEP_CUSTOM_ZIMLETS="yes"
     KEEP_CUSTOM_SKINS="yes"
 
+  NAGIOS_ZCS_MAILBOX
+  ==================
+  Command line example:
+    Example: $0 --conf=/home/user/myzimbra.conf --distro=ubuntu1204 --zimbra-type=ose --nagios-zcs-mailbox
+  Config file example:
+    DISTRO="ubuntu1204"
+    ZIMBRA_TYPE="ose"
+    NAGIOS_ZCS_MAILBOX="yes"
+
   SETUP_CATALA
   ============
   Command line example:
